@@ -75,17 +75,17 @@ let corporate = document.getElementById('corporate'),
   work = document.getElementById('work'),
   help = document.getElementById('help');
 
-$('#corporate').on('mouseenter', expandCorporate);
-$('#corporate').on('mouseleave', shrinkCorporate);
+// $('#corporate').on('mouseenter', expandCorporate);
+// $('#corporate').on('mouseleave', shrinkCorporate);
 
-$('#production').on('mouseenter', expandProduction);
-$('#production').on('mouseleave', shrinkProduction);
+// $('#production').on('mouseenter', expandProduction);
+// $('#production').on('mouseleave', shrinkProduction);
 
 $('#work').on('mouseenter', expandWork);
 $('#work').on('mouseleave', shrinkWork);
 
-$('#help').on('mouseenter', expandHelp);
-$('#help').on('mouseleave', shrinkHelp);
+// $('#help').on('mouseenter', expandHelp);
+// $('#help').on('mouseleave', shrinkHelp);
 
 
 function expandCorporate() {
@@ -135,3 +135,81 @@ function shrinkHelp() {
   $('.types-img-wrapper-2').css('height', '250px');
   $('.types-img-wrapper-1').css('height', '250px');
 }
+
+
+
+
+
+let specs = {
+  corporate: {
+    wrapper: document.getElementById("corporate-mob"),
+    photo: document.getElementById("corporate-mob-pic"),
+    heading: document.getElementById("corporate-mob-heading"),
+    info: document.getElementById("corporate-mob-info")
+  },
+  production: {
+    wrapper: document.getElementById("production-mob"),
+    photo: document.getElementById("production-mob-pic"),
+    heading: document.getElementById("production-mob-heading"),
+    info: document.getElementById("production-mob-info")
+  },
+  work: {
+    wrapper: document.getElementById("work-mob"),
+    photo: document.getElementById("work-mob-pic"),
+    heading: document.getElementById("work-mob-heading"),
+    info: document.getElementById("work-mob-info")
+  }
+}
+
+$('#corporate-mob').on('mouseenter', function () {
+  expandMob(specs.corporate.wrapper, specs.corporate.heading, specs.corporate.photo, specs.corporate.info)
+});
+$('#corporate-mob').on('mouseleave', function () {
+  shrinkMob(specs.corporate.wrapper, specs.corporate.heading, specs.corporate.photo, specs.corporate.info)
+});
+$('#production-mob').on('mouseenter', function () {
+  expandMob(specs.production.wrapper, specs.production.heading, specs.production.photo, specs.production.info)
+});
+$('#production-mob').on('mouseleave', function () {
+  shrinkMob(specs.production.wrapper, specs.production.heading, specs.production.photo, specs.production.info)
+});
+$('#work-mob').on('mouseenter', function () {
+  expandMob(specs.work.wrapper, specs.work.heading, specs.work.photo, specs.work.info)
+});
+$('#work-mob').on('mouseleave', function () {
+  shrinkMob(specs.work.wrapper, specs.work.heading, specs.work.photo, specs.work.info)
+});
+
+function expandMob(wrapper, heading, photo, info) {
+  wrapper.style.opacity = "0";
+  heading.style.display = "none";
+  photo.style.display = "none";
+  info.style.display = "block";
+  wrapper.style.height = 'auto';
+  wrapper.style.opacity = "1";
+}
+
+function shrinkMob(wrapper, heading, photo, info) {
+  wrapper.style.opacity = "0";
+  heading.style.display = "block";
+  photo.style.display = "block";
+  info.style.display = "none";
+  wrapper.style.height = '250px';
+  wrapper.style.opacity = "1";
+}
+
+
+let pushbar = new Pushbar({
+  blur:true,
+  overlay:true,
+});
+
+$(document).on('pushbar_opening', function () {
+  $('#btn-menu').addClass('is-active')
+});
+$(document).on('pushbar_closing', function () {
+  $('#btn-menu').removeClass('is-active')
+});
+$(".nav-link").on('click', function () {
+  pushbar.close('mypushbar1');
+})
